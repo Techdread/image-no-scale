@@ -49,39 +49,16 @@ const Scene = ({ texture }) => {
 };
 
 const ImageCuboid = ({ originalImageUrl, processedImageUrl }) => {
-  const textureLoader = new THREE.TextureLoader();
-  
-  // Load both textures
-  const originalTexture = originalImageUrl ? textureLoader.load(originalImageUrl) : null;
-  const processedTexture = processedImageUrl ? textureLoader.load(processedImageUrl) : null;
-
-  // Configure textures if they exist
-  [originalTexture, processedTexture].forEach(texture => {
-    if (texture) {
-      texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-      texture.repeat.set(1, 1);
-      texture.encoding = THREE.sRGBEncoding;
-    }
-  });
-
   return (
-    <div className="flex gap-4">
-      <div style={{ width: '400px', height: '300px' }}>
-        <h4 className="text-sm font-medium mb-2 text-center">Original Image Cube</h4>
-        <Canvas
-          camera={{ position: [5, 5, 5], fov: 75 }}
-          style={{ background: '#f0f0f0' }}
-        >
-          <Scene texture={originalTexture} />
+    <div className="grid grid-cols-2 gap-4">
+      <div className="h-[300px] border border-gray-200 rounded-lg overflow-hidden">
+        <Canvas camera={{ position: [0, 0, 6], fov: 50 }}>
+          <Scene texture={originalImageUrl ? new THREE.TextureLoader().load(originalImageUrl) : null} />
         </Canvas>
       </div>
-      <div style={{ width: '400px', height: '300px' }}>
-        <h4 className="text-sm font-medium mb-2 text-center">Processed Image Cube</h4>
-        <Canvas
-          camera={{ position: [5, 5, 5], fov: 75 }}
-          style={{ background: '#f0f0f0' }}
-        >
-          <Scene texture={processedTexture} />
+      <div className="h-[300px] border border-gray-200 rounded-lg overflow-hidden">
+        <Canvas camera={{ position: [0, 0, 6], fov: 50 }}>
+          <Scene texture={processedImageUrl ? new THREE.TextureLoader().load(processedImageUrl) : null} />
         </Canvas>
       </div>
     </div>
