@@ -1,9 +1,11 @@
 import { useState, useRef, useEffect } from 'react';
 import { Button } from './ui/button';
 import { Download } from 'lucide-react';
+import ImageCuboid from './ImageCuboid';
 
 const ImageProcessor = () => {
   const [selectedImage, setSelectedImage] = useState(null);
+  const [imageUrl, setImageUrl] = useState(null);
   const originalCanvasRef = useRef(null);
   const processedCanvasRef = useRef(null);
 
@@ -15,6 +17,7 @@ const ImageProcessor = () => {
         const img = new Image();
         img.onload = () => {
           setSelectedImage(img);
+          setImageUrl(e.target.result);
           drawImage(img);
         };
         img.src = e.target.result;
@@ -83,7 +86,7 @@ const ImageProcessor = () => {
         />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
         <div className="space-y-2">
           <h3 className="text-lg font-semibold">Original Image (Stretched)</h3>
           <canvas
@@ -104,6 +107,15 @@ const ImageProcessor = () => {
           />
         </div>
       </div>
+
+      {imageUrl && (
+        <div className="mb-6">
+          <h3 className="text-lg font-semibold mb-2">3D Cuboid Preview</h3>
+          <div className="border border-black bg-white">
+            <ImageCuboid imageUrl={imageUrl} />
+          </div>
+        </div>
+      )}
 
       <div className="mt-6">
         <Button
