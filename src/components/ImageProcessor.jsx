@@ -5,7 +5,8 @@ import ImageCuboid from './ImageCuboid';
 
 const ImageProcessor = () => {
   const [selectedImage, setSelectedImage] = useState(null);
-  const [imageUrl, setImageUrl] = useState(null);
+  const [originalImageUrl, setOriginalImageUrl] = useState(null);
+  const [processedImageUrl, setProcessedImageUrl] = useState(null);
   const originalCanvasRef = useRef(null);
   const processedCanvasRef = useRef(null);
 
@@ -17,7 +18,7 @@ const ImageProcessor = () => {
         const img = new Image();
         img.onload = () => {
           setSelectedImage(img);
-          setImageUrl(e.target.result);
+          setOriginalImageUrl(e.target.result);
           drawImage(img);
         };
         img.src = e.target.result;
@@ -45,6 +46,9 @@ const ImageProcessor = () => {
       processedDimensions.width,
       processedDimensions.height
     );
+
+    // Update processed image URL
+    setProcessedImageUrl(processedCanvasRef.current.toDataURL('image/png'));
   };
 
   const calculateDimensions = (img, maxWidth, maxHeight) => {
@@ -108,12 +112,13 @@ const ImageProcessor = () => {
         </div>
       </div>
 
-      {imageUrl && (
+      {originalImageUrl && processedImageUrl && (
         <div className="mb-6">
-          <h3 className="text-lg font-semibold mb-2">3D Cuboid Preview</h3>
-          <div className="border border-black bg-white">
-            <ImageCuboid imageUrl={imageUrl} />
-          </div>
+          <h3 className="text-lg font-semibold mb-4">3D Cuboid Preview</h3>
+          <ImageCuboid 
+            originalImageUrl={originalImageUrl} 
+            processedImageUrl={processedImageUrl}
+          />
         </div>
       )}
 
