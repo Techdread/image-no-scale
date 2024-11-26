@@ -1,6 +1,6 @@
 # Image Processing Application
 
-A React-based web application for image processing that maintains aspect ratio while scaling images to fit within specified dimensions.
+A React-based web application for image processing that maintains aspect ratio while scaling images to fit within specified dimensions, featuring interactive 3D cube visualizations.
 
 ## Features
 
@@ -15,6 +15,16 @@ A React-based web application for image processing that maintains aspect ratio w
   - White margin addition for aspect ratio differences
   - No image cropping
 
+- **3D Visualization**
+  - Two interactive 3D cubes showing both versions of the image
+  - Left cube: Original image (stretched) on all faces
+  - Right cube: Processed image (aspect ratio maintained) on all faces
+  - Auto-rotation for better visualization
+  - Independent camera controls for each cube:
+    * Rotate: Click and drag
+    * Zoom: Mouse wheel
+    * Pan: Right-click and drag
+
 - **User Interface**
   - Clean, modern design using shadcn/ui
   - Intuitive file upload interface
@@ -24,6 +34,9 @@ A React-based web application for image processing that maintains aspect ratio w
 ## Technology Stack
 
 - React + Vite
+- Three.js for 3D visualization
+- @react-three/fiber for React integration
+- @react-three/drei for 3D controls
 - Tailwind CSS
 - shadcn/ui components
 - HTML5 Canvas API
@@ -58,8 +71,20 @@ A React-based web application for image processing that maintains aspect ratio w
 ## Usage
 
 1. Click the file input to select an image
-2. View both the original and processed versions side by side
-3. Click "Save Processed Image" to download the processed image as PNG
+2. View both the original and processed versions in the 2D canvases:
+   - Left canvas: Stretched original image
+   - Right canvas: Aspect ratio maintained image
+
+3. Explore the 3D visualization below:
+   - Left cube shows the original image on all faces
+   - Right cube shows the processed image on all faces
+   - Both cubes auto-rotate for better visualization
+   - Interact with each cube independently:
+     * Click and drag to rotate
+     * Use mouse wheel to zoom
+     * Right-click and drag to pan
+
+4. Click "Save Processed Image" to download the processed version as PNG
 
 ## Features in Detail
 
@@ -69,6 +94,13 @@ A React-based web application for image processing that maintains aspect ratio w
 - Images are centered both horizontally and vertically
 - White margins are added where necessary to maintain aspect ratio
 
+### 3D Visualization
+- Real-time 3D rendering using Three.js
+- Automatic texture mapping on all cube faces
+- Independent camera controls for each cube
+- Smooth auto-rotation with adjustable speed
+- High-quality texture rendering with proper encoding
+
 ### Save Functionality
 - Processed images are saved in PNG format
 - Default filename: "processed-image.png"
@@ -76,7 +108,7 @@ A React-based web application for image processing that maintains aspect ratio w
 
 ## Development
 
-Built with Vite for fast development and optimal production builds. Uses Tailwind CSS for styling and shadcn/ui for consistent UI components.
+Built with Vite for fast development and optimal production builds. Uses Three.js for 3D visualization, Tailwind CSS for styling, and shadcn/ui for consistent UI components.
 
 ### Building for Production
 
