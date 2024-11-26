@@ -24,20 +24,13 @@ const ImageProcessor = () => {
   };
 
   const drawImage = (img) => {
-    // Draw original image
+    // Draw original image (stretched)
     const originalCtx = originalCanvasRef.current.getContext('2d');
     originalCtx.fillStyle = 'white';
     originalCtx.fillRect(0, 0, 400, 300);
-    const originalDimensions = calculateDimensions(img, 400, 300);
-    originalCtx.drawImage(
-      img,
-      originalDimensions.x,
-      originalDimensions.y,
-      originalDimensions.width,
-      originalDimensions.height
-    );
+    originalCtx.drawImage(img, 0, 0, 400, 300);
 
-    // Draw processed image
+    // Draw processed image (maintaining aspect ratio)
     const processedCtx = processedCanvasRef.current.getContext('2d');
     processedCtx.fillStyle = 'white';
     processedCtx.fillRect(0, 0, 400, 300);
@@ -92,7 +85,7 @@ const ImageProcessor = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-2">
-          <h3 className="text-lg font-semibold">Original Image</h3>
+          <h3 className="text-lg font-semibold">Original Image (Stretched)</h3>
           <canvas
             ref={originalCanvasRef}
             width={400}
