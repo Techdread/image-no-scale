@@ -7,12 +7,12 @@ import { Upload, X } from 'lucide-react';
 
 const MAX_IMAGES = 6;
 const FACE_DIMENSIONS = [
-  { width: 400, height: 300 },  // Front
-  { width: 400, height: 300 },  // Back
-  { width: 400, height: 200 },  // Top
-  { width: 400, height: 200 },  // Bottom
   { width: 200, height: 300 },  // Left
   { width: 200, height: 300 },  // Right
+  { width: 400, height: 200 },  // Top
+  { width: 400, height: 200 },  // Bottom
+  { width: 400, height: 300 },  // Front
+  { width: 400, height: 300 },  // Back
 ];
 
 const calculateDimensions = (img, maxWidth, maxHeight) => {
